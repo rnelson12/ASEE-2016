@@ -45,16 +45,18 @@ State Grid::checkLine(){
 	need to add support for back line following leds...
 	finite adjustments...
    */
-   if(grid[1].getValue()==BLACK&&grid[2].getValue()==BLACK){
-    //should be centered on line...don't think I even need this...
-	   //need a macro adjustment for the back two sensors
+	if(grid[0].getValue()==BLACK||grid[2].getValue()==WHITE){
+		adjusting=true;
+		return ADJUST_LEFT;
+   	}else if(grid[3].getValue()==BLACK||grid[1].getValue()==WHITE){
+	   	adjusting=true;
+	   	return ADJUST_RIGHT;
+   	}
+   
+   	if(adjusting){
+		return RETURN_TO_NORMAL;
+	}
     return NO_ADJUST;
-   }else if(grid[0].getValue()==BLACK||grid[2].getValue()==WHITE){
-    return ADJUST_LEFT;
-   }else if(grid[3].getValue()==BLACK||grid[1].getValue()==WHITE){
-    return ADJUST_RIGHT;
-   }
-   return NO_ADJUST;
 }
 
 /*

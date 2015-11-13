@@ -15,6 +15,7 @@ class Grid{
     boolean atIntersection();
     boolean atLeftCorner();
     boolean atRightCorner();
+	boolean adjusting;
 };
 
 #endif
