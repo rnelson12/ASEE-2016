@@ -9,6 +9,7 @@ typedef enum{
 
   ADJUST_LEFT,
   ADJUST_RIGHT,
+  RETURN_TO_NORMAL,
   NO_ADJUST,
 
   TURN_LEFT,

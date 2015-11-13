@@ -1,7 +1,10 @@
 #include "Grid.h"
 #include "Sensor.h"
-#include <Arduino.h>
 
+/*
+	need to make sure that the first 4 are line followers
+	and the rest are the turning calculators.
+*/
 void Grid::begin(){
   for(byte i=0;i<numSensors;i++){
     grid[i]=Sensor(i);  //may need to change to like i+4
@@ -25,41 +28,58 @@ State Grid::calculateTurn(){
   return CONTINUE;
 }
 
+/*
+	checks to make sure it is still following the line
+*/
 State Grid::checkLine(){
-  /*0=left outside
-   * 1=left inside
-   * 2=right inside
-   * 3=right outside
+  /*
+	pin assignments
+	0=left outside
+    1=left inside
+    2=right inside
+    3=right outside
+	4=back left
+	5=back right
+	6=left turn sensor
+	7=right turn sensor
+	need to add support for back line following leds...
+	finite adjustments...
    */
-   if(grid[1].getValue()==BLACK&&grid[2].getValue()==BLACK){
-    //should be centered on line...don't think I even need this...
+	if(grid[0].getValue()==BLACK||grid[2].getValue()==WHITE){
+		adjusting=true;
+		return ADJUST_LEFT;
+   	}else if(grid[3].getValue()==BLACK||grid[1].getValue()==WHITE){
+	   	adjusting=true;
+	   	return ADJUST_RIGHT;
+   	}
+   
+   	if(adjusting){
+		return RETURN_TO_NORMAL;
+	}
     return NO_ADJUST;
-   }else if(grid[0].getValue()==BLACK||grid[2].getValue()==WHITE){
-    return ADJUST_LEFT;
-   }else if(grid[3].getValue()==BLACK||grid[1].getValue()==WHITE){
-    return ADJUST_RIGHT;
-   }
-   return NO_ADJUST;
 }
 
+/*
+	for now, just checking to see if the turning sensors
+	are going off...may need to change to check the inner
+	linefollowing leds as well.
+*/
 boolean Grid::atIntersection(){
-  for(byte i=0;i<numSensors;i++){
-    if(grid[i].getValue()==WHITE){
-      return false;
-    }
+  if(grid[6]&&grid[7]){
+	  return true;
   }
-  return true;
+  return false;
 }
 
 boolean Grid::atLeftCorner(){
-  if(grid[0].getValue()==BLACK){
+  if(grid[6].getValue()==BLACK){
     return true;
   }
   return false;
 }
 
 boolean Grid::atRightCorner(){
-  if(grid[3].getValue()==BLACK){
+  if(grid[7].getValue()==BLACK){
     return true;
   }
   return false;

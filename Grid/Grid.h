@@ -10,11 +10,12 @@ class Grid{
     State calculateTurn();
     State checkLine();
   private:
-    static const int numSensors=4;
+    static const int numSensors=8;
     Sensor grid[numSensors];
     boolean atIntersection();
     boolean atLeftCorner();
     boolean atRightCorner();
+	boolean adjusting;
 };
 
 #endif
