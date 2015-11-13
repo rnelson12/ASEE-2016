@@ -43,9 +43,11 @@ State Grid::checkLine(){
 	6=left turn sensor
 	7=right turn sensor
 	need to add support for back line following leds...
+	finite adjustments...
    */
    if(grid[1].getValue()==BLACK&&grid[2].getValue()==BLACK){
     //should be centered on line...don't think I even need this...
+	   //need a macro adjustment for the back two sensors
     return NO_ADJUST;
    }else if(grid[0].getValue()==BLACK||grid[2].getValue()==WHITE){
     return ADJUST_LEFT;
