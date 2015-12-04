@@ -3,9 +3,7 @@
 
 #include <Arduino.h>
 #include "Types.h"
-
-#define WHITE 42
-#define BLACK 1020
+#include "Configure.h"
 
 class Sensor{
   public:

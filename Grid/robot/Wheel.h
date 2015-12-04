@@ -4,10 +4,9 @@
 #include <Arduino.h>
 
 class Wheel{
-
 public:
-	Wheel(int pin,int wheelOffset);
-	void setPower(int power);
+	Wheel(int pinNumber,int wheelOffset);
+	void setPower(int pwr);
 private:
 	int power;
 	int pin;

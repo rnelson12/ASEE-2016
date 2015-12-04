@@ -9,9 +9,9 @@ State Sensor::getValue(){
 }
 
 State Sensor::convertToBool(int value){
-  if(value-10<WHITE&&value+10>WHITE){
+  if(value-10<WHITE_VALUE&&value+10>WHITE_VALUE){
     return WHITE;
-  }else if(value-10<BLACK&&value+10>BLACK){
+  }else if(value-10<BLACK_VALUE&&value+10>BLACK_VALUE){
     return BLACK;
   }else{
     return NO_COLOR;

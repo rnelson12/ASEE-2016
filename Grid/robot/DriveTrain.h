@@ -1,9 +1,10 @@
-#ifndef DRIVETRAIN
-#define DRIVETRAIN
+#ifndef DRIVETRAIN_h
+#define DRIVETRAIN_h
 
+#include "Wheel.h"
 #include "Types.h"
 #include <Arduino.h>
-#include "Config.h"
+#include "Configure.h"
 
 class DriveTrain{
 	
@@ -13,6 +14,8 @@ public:
 private:
 	Wheel left;
 	Wheel right;
+  int rightPower;
+  int leftPower;
 };
 
 #endif

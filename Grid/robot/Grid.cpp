@@ -65,7 +65,7 @@ State Grid::checkLine(){
 	linefollowing leds as well.
 */
 boolean Grid::atIntersection(){
-  if(grid[6]&&grid[7]){
+  if(grid[6].getValue()==BLACK&&grid[7].getValue()==BLACK){
 	  return true;
   }
   return false;
