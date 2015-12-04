@@ -60,7 +60,7 @@ void debug(){
   boolean runNormal=false;
   if(DEBUG){
     log("welcome to debugging!");
-    log("TURN OFF DEBUGING BEFORE GOING TO COMPETE OR THE ROBOT WILL SIT AND WAIT FOR YOU TO PRESS A KEY");
+    log("TURN OFF DEBUGING BEFORE GOING TO COMPETE OR THE ROBOT WILL SIT AND WAIT FOR YOUR SORRY ASS TO PRESS A KEY");
     log("press c to debug the cogs.");
     log("press m to debug the motors");
     log("press r to run with verbous output");
