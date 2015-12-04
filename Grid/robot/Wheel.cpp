@@ -13,6 +13,7 @@ void Wheel::setPower(int pwr){
     //write to the reverse pin
     power=pwr*-1;
     //may need a maping function here because pwr may be a percent...
+    //make sure to write the offset as well as the power.
   }else{
     power=pwr;
     
