@@ -5,11 +5,12 @@
 
 class Wheel{
 public:
-	Wheel(int pinNumber,int wheelOffset);
+	Wheel(int forwardPin,int backPin,int wheelOffset);
 	void setPower(int pwr);
 private:
 	int power;
 	int pin;
+  int reversePin;
 	int offset;
 };
 

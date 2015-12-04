@@ -7,7 +7,7 @@
 */
 void Grid::begin(){
   for(byte i=0;i<numSensors;i++){
-    grid[i]=Sensor(i);  //may need to change to like i+4
+    grid[i].begin(i);  //may need to change to like i+4
   }
 }
 

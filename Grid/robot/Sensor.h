@@ -7,7 +7,7 @@
 
 class Sensor{
   public:
-    Sensor(int pin);
+    void begin(int pin);
     State getValue();
   private:
   State convertToBool(int value);

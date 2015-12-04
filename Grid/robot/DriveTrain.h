@@ -12,8 +12,6 @@ public:
 	DriveTrain(int defaultRightPower, int defaultLeftPower);
 	void drive(int power, State direction);
 private:
-	Wheel left;
-	Wheel right;
   int rightPower;
   int leftPower;
 };

@@ -1,6 +1,6 @@
 #include "Sensor.h"
 
-Sensor::Sensor(int sensorPin){
+void Sensor::begin(int sensorPin){
   pin=sensorPin;
 }
 
