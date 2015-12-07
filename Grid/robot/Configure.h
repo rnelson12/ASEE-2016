@@ -7,11 +7,15 @@
  * everything should be labeled pretty well and if not, I have included some
  * pretty awesome discriptions of the variables.
  * 
- * Please dont change the code. That is so incredably hard to debug...Most
- * likely we will have to scrap the code that you modified and start over so
- * just dont. THAT MEANS YOU SAGE. JUST USE THE CONFIG FILE
+ * Please dont change the code. That is incredably hard to debug...Like if
+ * you change one thing like i++ to i-- it will take us hours to figure out
+ * what the fuck you changed and most likely will have to get a fresh copy 
+ * of the code from the github. I mean thats not the biggest hassle but its
+ * still inconveinent so just dont.Most likely we will have to scrap the 
+ * code that you modified and start over so just dont. THAT MEANS YOU SAGE. 
+ * JUST USE THE CONFIG FILE
  * 
- * anything that is a pin or a sensor or an output pin to like a motor should
+ * Anything that is a pin or a sensor or an output pin to like a motor should
  * be a digital pin. So all you have to do to change that is change it from
  * like 2 to 5. If it is an analog READ not write, use A0 through A6.
  * 
@@ -70,6 +74,11 @@
 
 /*
  * configuration for the sensors
+ * 
+ * these are values for the line following sensors. White is the wood and you
+ * should know that so dont come to me and say "Kelly, what does the white
+ * value do?" because I'm going to say go read the config file then do some
+ * kind of z formation snap or maybe inquire that your mother is a prostitute.
  */
 #define WHITE_VALUE 42
 #define BLACK_VALUE 1020

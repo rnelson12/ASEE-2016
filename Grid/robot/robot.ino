@@ -34,16 +34,20 @@ void loop()
   //or maybe check line then see if we need to turn then adjust?
   State lineCheck=grid.checkLine();
   State turnStatus=grid.calculateTurn();
-  if(turnStatus!=FORWARD||turnStatus!=CONTINUE){
+  if(turnStatus==path[i]){
     //needs to turn also check to see if it is time to drop a ring
     base.drive(power,turnStatus);
+    log("turning "+turnStatus);
+    i++;
+    log("i is now at "+i);
   }else{
     if(lineCheck==ADJUST_LEFT){
-      
+      base.drive(power,ADJUST_LEFT);
     }else if(lineCheck==ADJUST_RIGHT){
-      
+      base.drive(power,ADJUST_RIGHT);
     }else if(RETURN_TO_NORMAL){
       //if we add 10% to the motors we have to take it off here...or not...
+      base.drive(power,RETURN_TO_NORMAL);
     }
   }
   elapsedTime = millis();
