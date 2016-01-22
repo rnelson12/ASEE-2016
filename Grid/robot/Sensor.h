@@ -3,13 +3,11 @@
 
 #include <Arduino.h>
 #include "Types.h"
-
-#define WHITE 42
-#define BLACK 1020
+#include "Configure.h"
 
 class Sensor{
   public:
-    Sensor(int pin);
+    void begin(int pin);
     State getValue();
   private:
   State convertToBool(int value);

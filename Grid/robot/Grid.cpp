@@ -7,7 +7,7 @@
 */
 void Grid::begin(){
   for(byte i=0;i<numSensors;i++){
-    grid[i]=Sensor(i);  //may need to change to like i+4
+    grid[i].begin(i);  //may need to change to like i+4
   }
 }
 
@@ -65,7 +65,7 @@ State Grid::checkLine(){
 	linefollowing leds as well.
 */
 boolean Grid::atIntersection(){
-  if(grid[6]&&grid[7]){
+  if(grid[6].getValue()==BLACK&&grid[7].getValue()==BLACK){
 	  return true;
   }
   return false;
