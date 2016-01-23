@@ -9,7 +9,9 @@ class SensorGrid
 public:
 	SensorGrid();
 	~SensorGrid();
-	enum calculateTurn();
+	State calculateTurn();
+	State checkLine();
+	void begin();
 
 private:
 	bool atIntersection();
@@ -17,6 +19,9 @@ private:
 	bool atRight();
 	byte numSensors;
 	Sensor[] sensorArray;
+	boolean adjusting;
+    static const int numSensors=8;
+    Sensor grid[numSensors];
 };
 
 #endif
