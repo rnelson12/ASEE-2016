@@ -1,7 +1,10 @@
-//#include<EEPROM.h>
+#include<EEPROM.h>
 //#include <EEPROMAnything.h>
 #include <Drivetrain.h>
 #include <Cog.h>
+#incude <Arduino.h>
+#include "Configure.h"
+#include <Servo.h>
 
 typedef unsigned char byte;
 unsigned long elapsedTime = 0;
