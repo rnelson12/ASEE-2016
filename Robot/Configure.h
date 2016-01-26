@@ -51,10 +51,11 @@
 //this is the degrees that the motor needs to turn to drop another ring.
 #define NEXT_RING 180
 
+#define WHEEL_RADIUS 10
+
 /*
  * right wheel settings
  */
-#define WHEEL_RADIUS 10
 #define RIGHT_MOTOR_POWER 100
 #define RIGHT_WHEEL_PIN 5
 #define RIGHT_REVERSE_PIN 7

@@ -5,24 +5,25 @@
 #include <EEPROM.h>
 //#include <EEPROMAnything.h>
 #include "Wheel.h"
-#include "Grid.h"
+#include "SensorGrid.h"
 #include "Wheel.h"
 #include "Types.h"
 #include <Arduino.h>
 #include "Configure.h"
 
-typedef unsigned char byte;
+//typedef unsigned char byte;
 
-class Drivetrain
+class DriveTrain
 {
 public:
-	Drivetrain(byte leftMotorForward, byte leftMotorBackward, byte rightMotorForward, byte rightMotorBackward, byte power, byte wheelRadius);
-	~Drivetrain();
+  DriveTrain(int defaultLeftPower,int defaultRightPower);
+	//DriveTrain(byte leftMotorForward, byte leftMotorBackward, byte rightMotorForward, byte rightMotorBackward, byte power, byte wheelRadius);
+	~DriveTrain();
 	void drive(byte power, State direction);
 private:
 	Wheel *left;
 	Wheel *right;
-	Grid *sensors;
+	SensorGrid *sensors;
     int rightPower;
     int leftPower;
 };
