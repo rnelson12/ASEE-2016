@@ -1,13 +1,13 @@
-#include "Grid.h"
+#include "SensorGrid.h"
 #include "Sensor.h"
 
 /*
 	need to make sure that the first 4 are line followers
 	and the rest are the turning calculators.
 */
-void Grid::begin(){
+void SensorGrid::begin(){
   for(byte i=0;i<numSensors;i++){
-    grid[i].begin(i);  //may need to change to like i+4
+    grid[i]=Sensor(i);  //may need to change to like i+4
   }
 }
 
@@ -16,7 +16,7 @@ void Grid::begin(){
  * turn...because it could possibly think that it is at an intersection when
  * in reality it is just turning...
  */
-State Grid::calculateTurn(){
+State SensorGrid::calculateTurn(){
   if(atLeftCorner()){
     return TURN_LEFT;
   }else if(atRightCorner()){
@@ -31,7 +31,7 @@ State Grid::calculateTurn(){
 /*
 	checks to make sure it is still following the line
 */
-State Grid::checkLine(){
+State SensorGrid::checkLine(){
   /*
 	pin assignments
 	0=left outside
@@ -64,21 +64,21 @@ State Grid::checkLine(){
 	are going off...may need to change to check the inner
 	linefollowing leds as well.
 */
-boolean Grid::atIntersection(){
+boolean SensorGrid::atIntersection(){
   if(grid[6].getValue()==BLACK&&grid[7].getValue()==BLACK){
 	  return true;
   }
   return false;
 }
 
-boolean Grid::atLeftCorner(){
+boolean SensorGrid::atLeftCorner(){
   if(grid[6].getValue()==BLACK){
     return true;
   }
   return false;
 }
 
-boolean Grid::atRightCorner(){
+boolean SensorGrid::atRightCorner(){
   if(grid[7].getValue()==BLACK){
     return true;
   }

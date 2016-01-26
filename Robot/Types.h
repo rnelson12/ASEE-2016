@@ -2,8 +2,8 @@
 #define TYPES_H
 
 typedef enum {
-	BLACK,
-	WHITE,
+	BLACK_STATE,
+	WHITE_STATE,
 	RED,
 	NO_COLOR,
 

@@ -1,7 +1,11 @@
 #ifndef SENSORGRID_H
 #define SENSORGRID_h
 
-typedef unsigned char byte;
+#include <Arduino.h>
+#include "Types.h"
+#include "Sensor.h"
+
+//typedef unsigned char byte;
 
 
 class SensorGrid
@@ -16,12 +20,10 @@ public:
 private:
 	bool atIntersection();
 	bool atLeftCorner();
-	bool atRight();
-	byte numSensors;
-	Sensor[] sensorArray;
+	bool atRightCorner();
 	boolean adjusting;
-    static const int numSensors=8;
-    Sensor grid[numSensors];
+  static const byte numSensors=8;
+  Sensor grid[numSensors];
 };
 
 #endif
