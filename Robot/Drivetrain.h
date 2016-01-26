@@ -3,9 +3,13 @@
 
 #include <Arduino.h>
 #include <EEPROM.h>
-#include <EEPROMAnything.h>
-#include <Wheel.h>
-#include <Grid.h>
+//#include <EEPROMAnything.h>
+#include "Wheel.h"
+#include "Grid.h"
+#include "Wheel.h"
+#include "Types.h"
+#include <Arduino.h>
+#include "Configure.h"
 
 typedef unsigned char byte;
 
@@ -14,11 +18,13 @@ class Drivetrain
 public:
 	Drivetrain(byte leftMotorForward, byte leftMotorBackward, byte rightMotorForward, byte rightMotorBackward, byte power, byte wheelRadius);
 	~Drivetrain();
-	void drive(byte power, enum direction);
+	void drive(byte power, State direction);
 private:
-	Wheel *leftWheel;
-	Wheel *rightWheel;
+	Wheel *left;
+	Wheel *right;
 	Grid *sensors;
+    int rightPower;
+    int leftPower;
 };
 
 #endif

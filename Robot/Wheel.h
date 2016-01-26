@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <EEPROM.h>
-#include <EEPROMAnything.h>
+//#include <EEPROMAnything.h>
 
 typedef unsigned char byte;
 
