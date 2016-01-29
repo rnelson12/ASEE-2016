@@ -1,9 +1,5 @@
 #include "Wheel.h"
 
-
-
-
-
 Wheel::Wheel(byte motorForward, byte motorBackward, byte radius, byte power)
 {
 	_motorPinForward = motorForward;

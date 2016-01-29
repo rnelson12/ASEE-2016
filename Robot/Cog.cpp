@@ -1,5 +1,4 @@
 #include"Cog.h"
-#include "Configure.h"
 
 Cog::Cog(byte rings,byte pinNumber){
   ringsLeft=rings;
