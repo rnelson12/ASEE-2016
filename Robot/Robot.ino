@@ -1,5 +1,4 @@
 #include<EEPROM.h>
-//#include "EEPROMAnything.h"
 #include "DriveTrain.h"
 #include "Cog.h"
 #include <Arduino.h>
@@ -11,14 +10,15 @@ unsigned long elapsedTime = 0;
 Cog *cog1;
 Cog *cog2;
 DriveTrain *base;
-byte leftRings = 6;
-byte rightRings = 6;
 byte leftMotorPinForward;
 byte leftMotorPinBackward;
 byte rightMotorPinForward;
 byte rightMotorPinBackward;
-byte motorPower = 255;
-byte wheelRadius = 10;
+const byte moveSize=8;
+State moves[8];
+State RIGHT_MOVES[]={TURN_LEFT,FORWARD,TURN_LEFT,TURN_LEFT,TURN_LEFT,TURN_RIGHT,FORWARD,TURN_RIGHT};
+State LEFT_MOVES[]={TURN_RIGHT,FORWARD,TURN_RIGHT,TURN_RIGHT,TURN_RIGHT,TURN_LEFT,FORWARD,TURN_LEFT};
+byte i=0;
 
 void setup()
 {
@@ -26,15 +26,29 @@ void setup()
   /* add setup code here */
 	Serial.begin(9600);
 
-	cog1 = new Cog(leftRings,RIGHT_COG_PIN);
-	cog2 = new Cog(rightRings,LEFT_COG_PIN);
+	cog1 = new Cog(LEFT_RINGS,RIGHT_COG_PIN);
+	cog2 = new Cog(RIGHT_RINGS,LEFT_COG_PIN);
 	base = new DriveTrain(RIGHT_MOTOR_POWER,LEFT_MOTOR_POWER);
+
+  if(!ROBOT_DIRECTION){
+    memcpy( RIGHT_MOVES, moves, moveSize);
+  }else{
+    memcpy( LEFT_MOVES, moves, moveSize);
+  }
+
+  if(DEBUG){
+    debug();
+  }
+  log("Starting normal startup");
 }
 
 void loop()
 {
-
-  /* add main program code here */
+  State upcommingTurn=base->sensors->calculateTurn();
+  if(upcommingTurn==moves[i]){
+    base->drive(MAX_POWER,moves[i]);
+    i++;
+  }
 	elapsedTime = millis();
 }
 

@@ -6,8 +6,9 @@
 //#include <CSensor.h>
 //#include <EEPROM.h>
 //#include <EEPROMAnything.h>
+#include "Configure.h"
 
-typedef unsigned char byte;
+//typedef unsigned char byte;
 
 class Cog
 {

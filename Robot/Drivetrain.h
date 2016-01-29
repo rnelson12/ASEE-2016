@@ -20,10 +20,10 @@ public:
 	//DriveTrain(byte leftMotorForward, byte leftMotorBackward, byte rightMotorForward, byte rightMotorBackward, byte power, byte wheelRadius);
 	~DriveTrain();
 	void drive(byte power, State direction);
+  SensorGrid *sensors;
 private:
 	Wheel *left;
 	Wheel *right;
-	SensorGrid *sensors;
     int rightPower;
     int leftPower;
 };
