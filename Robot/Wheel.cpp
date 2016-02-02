@@ -15,6 +15,7 @@ Wheel::~Wheel()
 void Wheel::setPower(byte powerValue)
 {
 	_power = powerValue;
+  analogWrite(_motorPinForward,powerValue);
 }
 
 int Wheel::calculateDistance()
