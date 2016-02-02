@@ -6,8 +6,8 @@ const byte motorAPWM=11;
 const byte motorBPin=6;
 const byte motorBPWM=5;
 
-const int BLACK=24;
-const int WHITE=1024;
+const int BLACK=1;
+const int WHITE=0;
 
 const byte CONTINUE=0;
 const byte ADJUST_LEFT=1;
@@ -33,13 +33,13 @@ void setup() {
 }
 
 void loop() {
-  int leftRead=analogRead(left);
-  int rightRead=analogRead(right);
+  int leftRead=digitalRead(left);
+  int rightRead=digitalRead(right);
 
-  if(leftRead==BLACK){
+  if(leftRead==BLACK&&rightRead==WHITE){
       //adjust right
       turn=ADJUST_LEFT;
-  }else if(rightRead==BLACK){
+  }else if(rightRead==BLACK&&leftRead==WHITE){
       //adjust left
       turn=ADJUST_RIGHT;
   }else if(rightRead==WHITE&&leftRead==WHITE){
@@ -55,25 +55,25 @@ void loop() {
 void drive(byte turnType){
   switch(turnType){
     case ADJUST_LEFT:
-    rightMotorPower+=5;
-    leftMotorPower=50;
+    rightMotorPower=20;
+    leftMotorPower=13;
       break;
     case ADJUST_RIGHT:
-    leftMotorPower+=5;
-    rightMotorPower=50;
+    leftMotorPower=25;
+    rightMotorPower=10;
       break;
     case CONTINUE:
-      rightMotorPower=50;
-      leftMotorPower=50;
+      rightMotorPower=20;
+      leftMotorPower=25;
   }
 
-  int mappedLeft=map(leftMotorPower,0,100,255,0);
-  int mappedRight=map(rightMotorPower,0,100,255,0);
+  int mappedLeft=map(leftMotorPower,0,100,0,250);
+  int mappedRight=map(rightMotorPower,0,100,0,250);
 
-  digitalWrite(motorAPin,HIGH);
+  digitalWrite(motorAPin,LOW);
   analogWrite(motorAPWM,mappedRight);
 
-  digitalWrite(motorBPin,HIGH);
+  digitalWrite(motorBPin,LOW);
   analogWrite(motorBPWM,mappedLeft);
 }
 
