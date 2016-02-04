@@ -44,8 +44,8 @@ void setup()
 
 void loop()
 {
-  State upcommingTurn=base->sensors->calculateTurn();
-  if(upcommingTurn==moves[i]){
+  State upcomingTurn=base->sensors->calculateTurn();
+  if(upcomingTurn==moves[i]){
     base->drive(MAX_POWER,moves[i]);
     i++;
   }

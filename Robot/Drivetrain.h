@@ -8,7 +8,6 @@
 #include "SensorGrid.h"
 #include "Wheel.h"
 #include "Types.h"
-#include <Arduino.h>
 #include "Configure.h"
 
 //typedef unsigned char byte;
