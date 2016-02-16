@@ -6,7 +6,7 @@
 //#include <EEPROMAnything.h>
 #include "Types.h"
 
-typedef unsigned char byte;
+//typedef unsigned char byte;
 #define WHITE 42
 #define BLACK 1020
 

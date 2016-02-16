@@ -1,9 +1,5 @@
 #include "Wheel.h"
 
-
-
-
-
 Wheel::Wheel(byte motorForward, byte motorBackward, byte radius, byte power)
 {
 	_motorPinForward = motorForward;
@@ -19,6 +15,7 @@ Wheel::~Wheel()
 void Wheel::setPower(byte powerValue)
 {
 	_power = powerValue;
+  analogWrite(_motorPinForward,powerValue);
 }
 
 int Wheel::calculateDistance()

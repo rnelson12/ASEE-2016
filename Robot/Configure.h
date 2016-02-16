@@ -30,6 +30,12 @@
 #define DEBUG 0
 
 /*
+ * set this to 0 if the robot is going to the right.
+ * or set this to 1 if the robot is going to go to the left
+ */
+ #define ROBOT_DIRECTION 0
+
+/*
  * pin number for the button or switch that starts the robots
  */
 #define START_BUTTON 2
@@ -44,6 +50,14 @@
 /*
  * cog settings
  */
+
+//different powers that you may to drive the motors at turns and whatnot
+#define MAX_POWER 100
+#define THREE_FOURTHS_POWER 75
+#define HALF_POWER 50
+#define QUARTER_POWER 25
+#define LOW_POWER 10
+ 
 #define LEFT_RINGS 6
 #define RIGHT_RINGS 6
 #define RIGHT_COG_PIN 9
@@ -51,10 +65,11 @@
 //this is the degrees that the motor needs to turn to drop another ring.
 #define NEXT_RING 180
 
+#define WHEEL_RADIUS 10
+
 /*
  * right wheel settings
  */
-#define WHEEL_RADIUS 10
 #define RIGHT_MOTOR_POWER 100
 #define RIGHT_WHEEL_PIN 5
 #define RIGHT_REVERSE_PIN 7

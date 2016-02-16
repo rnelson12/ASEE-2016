@@ -13,11 +13,11 @@ State Sensor::getValue() {
 }
 
 State Sensor::convertToBool(int value) {
-	if (value - 10<WHITE&&value + 10>WHITE) {
-		return WHITE;
+	if (value - 10<WHITE_STATE&&value + 10>WHITE_STATE) {
+		return WHITE_STATE;
 	}
 	else if (value - 10<BLACK&&value + 10>BLACK) {
-		return BLACK;
+		return BLACK_STATE;
 	}
 	else {
 		return NO_COLOR;
