@@ -5,7 +5,7 @@
 #include <EEPROM.h>
 //#include <EEPROMAnything.h>
 #include "Wheel.h"
-#include "SensorGrid.h"
+#include "Sensorbar.h"
 #include "Wheel.h"
 #include "Types.h"
 #include "Configure.h"
@@ -19,7 +19,7 @@ public:
 	//DriveTrain(byte leftMotorForward, byte leftMotorBackward, byte rightMotorForward, byte rightMotorBackward, byte power, byte wheelRadius);
 	~DriveTrain();
 	void drive(byte power, State direction);
-  SensorGrid *sensors;
+  SensorBar *sensorBar;
 private:
 	Wheel *left;
 	Wheel *right;

@@ -6,8 +6,14 @@
 	and the rest are the turning calculators.
 */
 void SensorGrid::begin(){
-  for(byte i=0;i<numSensors;i++){
-    grid[i]=Sensor(i);  //may need to change to like i+4
+  sensorBar=new SensorBar(0xE3);
+  sensorBar->setBarStrobe();
+  sensorBar->clearInvertBits();
+  uint8_t returnStatus=sensorBar->begin();
+  if(returnStatus){
+    //log("IR Bar communication OK");
+  }else{
+    //log("IR Bar communication failed :(");
   }
 }
 
@@ -81,15 +87,23 @@ bool SensorGrid::atIntersection(){
   return false;
 }
 
-bool SensorGrid::atLeftCorner(){
-  if(grid[6].getValue()==BLACK){
+
+boolean SensorGrid::atLeftCorner(){
+  /*if(grid[6].getValue()==BLACK){
+    return true;
+  }*/
+  if(sensorBar->getPosition()<-50){
     return true;
   }
   return false;
 }
 
-bool SensorGrid::atRightCorner(){
-  if(grid[7].getValue()==BLACK){
+
+boolean SensorGrid::atRightCorner(){
+  /*if(grid[7].getValue()==BLACK){
+    return true;
+  }*/
+  if(sensorBar->getPosition()>50){
     return true;
   }
   return false;
