@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include "Types.h"
 #include "Sensor.h"
-
+#include "Sensorbar.h"
 //typedef unsigned char byte;
 
 
@@ -24,6 +24,7 @@ private:
 	bool adjusting;
   static const byte numSensors=8;
   Sensor grid[numSensors];
+  SensorBar *sensorBar;
 };
 
 #endif

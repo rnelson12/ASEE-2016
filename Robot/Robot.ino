@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include "Configure.h"
 #include <Servo.h>
+#include <Wire.h>
 
 //typedef unsigned char byte;
 unsigned long elapsedTime = 0;
@@ -16,8 +17,8 @@ byte rightMotorPinForward;
 byte rightMotorPinBackward;
 const byte moveSize=8;
 State moves[8];
-State RIGHT_MOVES[]={TURN_LEFT,FORWARD,TURN_LEFT,TURN_LEFT,TURN_LEFT,TURN_RIGHT,FORWARD,TURN_RIGHT};
-State LEFT_MOVES[]={TURN_RIGHT,FORWARD,TURN_RIGHT,TURN_RIGHT,TURN_RIGHT,TURN_LEFT,FORWARD,TURN_LEFT};
+State RIGHT_MOVES[]={TURN_LEFT,TURN_LEFT,FORWARD,TURN_LEFT,TURN_LEFT,TURN_LEFT,TURN_RIGHT,FORWARD,TURN_RIGHT};
+State LEFT_MOVES[]={TURN_LEFT,TURN_RIGHT,FORWARD,TURN_RIGHT,TURN_RIGHT,TURN_RIGHT,TURN_LEFT,FORWARD,TURN_LEFT};
 byte i=0;
 
 void setup()
@@ -44,12 +45,13 @@ void setup()
 
 void loop()
 {
-  State upcomingTurn=base->sensors->calculateTurn();
-  if(upcomingTurn==moves[i]){
+
+  /*State upcomingTurn=base->sensors->calculateTurn();
+  if(upcommingTurn==moves[i]){
     base->drive(MAX_POWER,moves[i]);
     i++;
   }
-	elapsedTime = millis();
+	elapsedTime = millis();*/
 }
 
 void debug(){
