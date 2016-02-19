@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cog.h" />
+    <ClInclude Include="ColorSensor.h" />
     <ClInclude Include="Drivetrain.h" />
     <ClInclude Include="Sensor.h" />
     <ClInclude Include="SensorGrid.h" />
@@ -131,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cog.cpp" />
+    <ClCompile Include="ColorSensor.cpp" />
     <ClCompile Include="Drivetrain.cpp" />
     <ClCompile Include="Sensor.cpp" />
     <ClCompile Include="SensorGrid.cpp" />

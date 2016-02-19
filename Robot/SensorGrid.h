@@ -21,7 +21,7 @@ private:
 	bool atIntersection();
 	bool atLeftCorner();
 	bool atRightCorner();
-	boolean adjusting;
+	bool adjusting;
   static const byte numSensors=8;
   Sensor grid[numSensors];
   SensorBar *sensorBar;

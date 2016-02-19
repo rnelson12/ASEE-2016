@@ -17,6 +17,15 @@ void SensorGrid::begin(){
   }
 }
 
+SensorGrid::SensorGrid()
+{
+  //Todo: 
+}
+
+SensorGrid::~SensorGrid()
+{
+}
+
 /*
  * in this method, I may need to have the robot look to see if it is in mid-
  * turn...because it could possibly think that it is at an intersection when
@@ -29,6 +38,7 @@ State SensorGrid::calculateTurn(){
     return TURN_RIGHT;
   }else if(atIntersection()){
     //most likly go forward...not sure if it needs to turn or not...
+    //this needs to be expanded, there will be turns here too.
     return FORWARD;
   }
   return CONTINUE;
@@ -70,12 +80,13 @@ int SensorGrid::checkLine(){
 	are going off...may need to change to check the inner
 	linefollowing leds as well.
 */
-boolean SensorGrid::atIntersection(){
+bool SensorGrid::atIntersection(){
   if(grid[6].getValue()==BLACK&&grid[7].getValue()==BLACK){
 	  return true;
   }
   return false;
 }
+
 
 boolean SensorGrid::atLeftCorner(){
   /*if(grid[6].getValue()==BLACK){
@@ -86,6 +97,7 @@ boolean SensorGrid::atLeftCorner(){
   }
   return false;
 }
+
 
 boolean SensorGrid::atRightCorner(){
   /*if(grid[7].getValue()==BLACK){
