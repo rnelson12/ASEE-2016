@@ -37,13 +37,13 @@ State SensorGrid::calculateTurn(){
 /*
 	checks to make sure it is still following the line
 */
-State SensorGrid::checkLine(){
+int SensorGrid::checkLine(){
   /*
 	pin assignments
 	0=left outside
-    1=left inside
-    2=right inside
-    3=right outside
+  1=left inside
+  2=right inside
+  3=right outside
 	4=back left
 	5=back right
 	6=left turn sensor
