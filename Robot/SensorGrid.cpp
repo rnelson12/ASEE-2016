@@ -1,12 +1,11 @@
 #include "SensorGrid.h"
-#include "Sensor.h"
 
 /*
 	need to make sure that the first 4 are line followers
 	and the rest are the turning calculators.
 */
 void SensorGrid::begin(){
-  sensorBar=new SensorBar(0xE3);
+  sensorBar=new SensorBar(SENSOR_BAR_ADDRESS);
   sensorBar->setBarStrobe();
   sensorBar->clearInvertBits();
   uint8_t returnStatus=sensorBar->begin();
@@ -46,33 +45,30 @@ State SensorGrid::calculateTurn(){
 
 /*
 	checks to make sure it is still following the line
+  returns motorSpeed so I think thats just something that you plug into
+  the left or right motors...
 */
 int SensorGrid::checkLine(){
-  /*
-	pin assignments
-	0=left outside
-  1=left inside
-  2=right inside
-  3=right outside
-	4=back left
-	5=back right
-	6=left turn sensor
-	7=right turn sensor
-	need to add support for back line following leds...
-	finite adjustments...
-   */
-	if(grid[0].getValue()==BLACK||grid[2].getValue()==WHITE){
-		adjusting=true;
-		return ADJUST_LEFT;
-   	}else if(grid[3].getValue()==BLACK||grid[1].getValue()==WHITE){
-	   	adjusting=true;
-	   	return ADJUST_RIGHT;
-   	}
-   
-   	if(adjusting){
-		return RETURN_TO_NORMAL;
-	}
-    return NO_ADJUST;
+
+    uint8_t raw=sensorBar->getPosition();
+    position=0;
+    for(byte i=0;i<7;i++){
+      if(bitRead(raw,i)){
+        position+=10;
+      }
+    }
+
+    unsigned long now=millis();
+    unsigned long timeChange=(now-lastTime);
+
+    error=TARGET-position;
+    errSum+=(error*timeChange);
+    dErr=(error-lastError)/timeChange;
+
+    lastError=error;
+    lastTime=now;
+    
+    return kp*error+ki*errSum+kd*dErr;
 }
 
 /*
@@ -81,9 +77,11 @@ int SensorGrid::checkLine(){
 	linefollowing leds as well.
 */
 bool SensorGrid::atIntersection(){
+  /*
   if(grid[6].getValue()==BLACK&&grid[7].getValue()==BLACK){
 	  return true;
   }
+  */
   return false;
 }
 
