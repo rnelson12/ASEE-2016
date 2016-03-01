@@ -5,7 +5,6 @@ DriveTrain::DriveTrain(int defaultLeftPower,int defaultRightPower){
   leftPower=defaultLeftPower;
   left=new Wheel(LEFT_WHEEL_PIN,LEFT_REVERSE_PIN,LEFT_WHEEL_OFFSET,LEFT_MOTOR_POWER);
   right=new Wheel(RIGHT_WHEEL_PIN,RIGHT_REVERSE_PIN,RIGHT_WHEEL_OFFSET,RIGHT_MOTOR_POWER);
-  sensorBar=new SensorBar(0xE3);
 }
 
 void DriveTrain::drive(byte power, State direction){

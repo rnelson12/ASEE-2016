@@ -46,6 +46,10 @@ void setup()
 void loop()
 {
 
+  //check the line using a method from the grid.
+  //then adjust using the adjustment method in drivetrain
+  //then turn using the drive method in drivetrain
+
   /*State upcomingTurn=base->sensors->calculateTurn();
   if(upcommingTurn==moves[i]){
     base->drive(MAX_POWER,moves[i]);
