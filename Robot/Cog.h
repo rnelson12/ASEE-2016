@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <Servo.h>
-//#include <CSensor.h>
+#include "ColorSensor.h"
 //#include <EEPROM.h>
 //#include <EEPROMAnything.h>
 #include "Configure.h"
