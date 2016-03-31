@@ -6,15 +6,10 @@
 #include <Servo.h>
 #include <Wire.h>
 
-//typedef unsigned char byte;
 unsigned long elapsedTime = 0;
 Cog *cog1;
 Cog *cog2;
 DriveTrain *base;
-byte leftMotorPinForward;
-byte leftMotorPinBackward;
-byte rightMotorPinForward;
-byte rightMotorPinBackward;
 const byte moveSize=8;
 State moves[8];
 State RIGHT_MOVES[]={TURN_LEFT,TURN_LEFT,FORWARD,TURN_LEFT,TURN_LEFT,TURN_LEFT,TURN_RIGHT,FORWARD,TURN_RIGHT};

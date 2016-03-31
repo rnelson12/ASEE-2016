@@ -128,4 +128,11 @@
 #define WHITE_VALUE 42
 #define BLACK_VALUE 1020
 
+/*
+ * configuration for the color sensor. This value is what the robot will be
+ * comparing to the red box.
+ */
+
+ #define RED 6
+
 #endif

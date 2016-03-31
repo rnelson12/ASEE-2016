@@ -82,6 +82,11 @@ bool SensorGrid::atIntersection(){
 	  return true;
   }
   */
+  uint8_t raw=sensorBar->getRaw();
+  //should be the very left bit
+  if(bitRead(raw,0)&&bitRead(raw,7)){
+    return true;
+  }
   return false;
 }
 

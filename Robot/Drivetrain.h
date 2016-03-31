@@ -9,8 +9,6 @@
 #include "Types.h"
 #include "Configure.h"
 
-//typedef unsigned char byte;
-
 class DriveTrain
 {
 public:
