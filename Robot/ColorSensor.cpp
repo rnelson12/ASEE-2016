@@ -1,7 +1,5 @@
 #include "ColorSensor.h"
 
-
-
 ColorSensor::ColorSensor()
 {
   RGB_sensor.init();

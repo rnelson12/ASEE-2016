@@ -27,7 +27,8 @@
  * 
  * if it is an analog out pin like for the motor use one of the PWM pins. 
  * If you don’t know what that is, look on the Arduino. It should be labeled 
- * with a ~ or PWM. If you still cant find that, look it up.
+ * with a ~ or PWM. If you still cant find that, look it up. Still can't find it,
+ * shut up.
  */
 
 /*
