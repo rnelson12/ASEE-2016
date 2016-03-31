@@ -4,7 +4,7 @@
 
 ColorSensor::ColorSensor()
 {
-  
+  RGB_sensor.init();
 }
 
 
@@ -15,8 +15,8 @@ ColorSensor::~ColorSensor()
 
 bool ColorSensor::isRed()
 {
-	int currentSensorValue = 0;//TODO: get value from sensor
-	if (currentSensorValue == redComparisonValue)
+	unsigned int red=RGB_sensor.readRed();
+	if (red == RED)
 	{
 		return true;
 	}
