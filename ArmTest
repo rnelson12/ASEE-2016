@@ -1,0 +1,64 @@
+#include <Servo.h>
+
+const int ROTATION_DELAY = 1360;
+
+Servo contServo;
+Servo discreetServo;
+
+int armPos = 180;
+int servoSpeed = 89;
+
+bool armState = false;
+
+void setup() {
+  //Attach servos to pins
+  contServo.attach(11);
+  discreetServo.attach(10);
+  
+  //Initial positions
+  contServo.write(servoSpeed);
+  discreetServo.write(armPos);
+  delay(2000);
+  Serial.begin(9600);
+}
+
+void loop() {
+  
+  if (armState == false) { //Lift the Dumping Arm
+    armPos = 180;
+    for (armPos = 180; armPos >= 90; armPos -= 1) { // goes from 0 degrees to 180 degrees
+      discreetServo.write(armPos);
+      delay(15);      
+    }
+    servoSpeed = 100;
+    contServo.write(servoSpeed);
+    delay(ROTATION_DELAY);
+    servoSpeed = 89;
+    contServo.write(servoSpeed);
+    
+    armState = true;
+  }
+  
+  else if(armState == true) { //Lower the Dumping Arm
+    armPos = 90;
+    servoSpeed = 100;
+    contServo.write(servoSpeed);
+    delay(ROTATION_DELAY);
+    servoSpeed = 89;
+    contServo.write(servoSpeed);
+    for (armPos = 90; armPos <= 180; armPos += 1) { // goes from 0 degrees to 180 degrees  
+      //discreetServo.write(armPos);
+      delay(15); 
+    }
+    //armState = false;
+  }
+  
+  delay(1000);
+  
+  //Optional Serial
+  Serial.print("Arm: ");
+  Serial.println(armPos);
+  Serial.print("Speed: ");
+  Serial.println(servoSpeed);
+
+}
