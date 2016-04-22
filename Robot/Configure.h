@@ -68,9 +68,9 @@
  * may get more accurate. Or not. I don’t really know, I'm just a bad-ass 
  * programmer not a chemist.
  */
- #define kp 1
- #define kd 1
- #define ki 1
+ #define kp 0
+ #define kd 0
+ #define ki 0
 
 /*
  * The target is the center of the array (0-100)

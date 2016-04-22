@@ -5,10 +5,12 @@
 #include "Configure.h"
 #include <Servo.h>
 #include <Wire.h>
+#include "States.h"
 
 unsigned long elapsedTime = 0;
 Cog *cog1;
 Cog *cog2;
+States states1;
 DriveTrain *base;
 const byte moveSize=8;
 State moves[8];
@@ -45,12 +47,9 @@ void loop()
   //then adjust using the adjustment method in drivetrain
   //then turn using the drive method in drivetrain
 
-  /*State upcomingTurn=base->sensors->calculateTurn();
-  if(upcommingTurn==moves[i]){
-    base->drive(MAX_POWER,moves[i]);
-    i++;
-  }
-	elapsedTime = millis();*/
+  elapsedTime = millis();
+  states1->robot1tick(elapsedTime);
+	*/
 }
 
 void debug(){

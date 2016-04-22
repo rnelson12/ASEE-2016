@@ -13,20 +13,25 @@
 class Cog
 {
 public:
-	Cog(byte numRings,byte pinNumber);
+	Cog(byte numRings, byte pinNumberSpiral, byte pinNumberArm);
 	~Cog();
-	void dropNextRing();
+	bool dropNextRingLeft();
+	bool dropNextRingRight();
 	byte getNumRings();
+	bool turnArm(int angle);
+
 
 private:
 	int rotationalPosition;
 	//CSensor *colorSensor;
 	int numRingsLeft;
 	const int rotateVal = 60;
-	byte rings;
-    byte ringsLeft;
-    byte pin;
-    Servo servo;
+	byte ringsStarted;
+    byte ringsRemaining;
+    byte armPin;
+	byte spiralPin;
+    Servo arm;
+	Servo spiral;
     int pos;
     int nextRing;
 
