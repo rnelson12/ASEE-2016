@@ -6,15 +6,10 @@
 #include <Servo.h>
 #include <Wire.h>
 
-//typedef unsigned char byte;
 unsigned long elapsedTime = 0;
 Cog *cog1;
 Cog *cog2;
 DriveTrain *base;
-byte leftMotorPinForward;
-byte leftMotorPinBackward;
-byte rightMotorPinForward;
-byte rightMotorPinBackward;
 const byte moveSize=8;
 State moves[8];
 State RIGHT_MOVES[]={TURN_LEFT,TURN_LEFT,FORWARD,TURN_LEFT,TURN_LEFT,TURN_LEFT,TURN_RIGHT,FORWARD,TURN_RIGHT};
@@ -45,6 +40,10 @@ void setup()
 
 void loop()
 {
+
+  //check the line using a method from the grid.
+  //then adjust using the adjustment method in drivetrain
+  //then turn using the drive method in drivetrain
 
   /*State upcomingTurn=base->sensors->calculateTurn();
   if(upcommingTurn==moves[i]){

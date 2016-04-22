@@ -2,17 +2,23 @@
 #define CONFIGURE_H
 
 /*
- * configure file for the rockbot. This will include all the things that we,
- * the badass programing team, have decided that you muggals can change.
- * everything should be labeled pretty well and if not, I have included some
- * pretty awesome discriptions of the variables.
+ * This is the configure file for the rockbot. YES ALLY, IT IS A ROCKBOT STOP RUEING THIS FOR 
+ * ME! This will include all the things that we, the badass programing team, have decided that you
+ * muggals can change. Everything should be labeled pretty well and if not, I have included some
+ * pretty awesome descriptions of the variables.
  * 
- * Please dont change the code. That is incredably hard to debug...Like if
+ * By the way, this file is riddled with spelling error and grammar mistakes so if you come up to me
+ * and say “Hey, this word is misspelled in the config file” I will say “your mother”. Also, I added all of
+ * these funny comments because I know how frustrating it is to debug shit so take it lightly and as a
+ * joke because thats how it was written. Except for the parts where I may say stuff to you. I will still 
+ * say those :D
+ * 
+ * Please don’t change the code. That is incredibly hard to debug...Like if
  * you change one thing like i++ to i-- it will take us hours to figure out
  * what the fuck you changed and most likely will have to get a fresh copy 
  * of the code from the github. I mean thats not the biggest hassle but its
- * still inconveinent so just dont.Most likely we will have to scrap the 
- * code that you modified and start over so just dont. THAT MEANS YOU SAGE. 
+ * still inconvenient so just don’t. Most likely we will have to scrap the 
+ * code that you modified and start over so just don’t. THAT MEANS YOU SAGE. 
  * JUST USE THE CONFIG FILE
  * 
  * Anything that is a pin or a sensor or an output pin to like a motor should
@@ -20,12 +26,13 @@
  * like 2 to 5. If it is an analog READ not write, use A0 through A6.
  * 
  * if it is an analog out pin like for the motor use one of the PWM pins. 
- * If you dont know what that is, look on the arduino. It should be labeled 
+ * If you don’t know what that is, look on the Arduino. It should be labeled 
  * with a ~ or PWM. If you still cant find that, look it up.
  */
 
 /*
- * set this to 1 if you want the arduino to print to the serial for debugging
+ * set this to 1 if you want the Arduino to print to the serial for debugging
+ * FOR THE LOVE OF GOD! CHANGE THIS BACK TO 0 BEFORE WE GO TO THE CONTEST!
  */
 #define DEBUG 0
 
@@ -41,11 +48,34 @@
 #define START_BUTTON 2
 
 /*
- * not sure if we need this or not but I think if we just label 1 pin for the
- * sensor grid then have the code assign the next 8 or so after that pin
- * as sensors, we should be good.
+ * This is the address for the sensor bar. DON’T CHANGE THIS. UNLESS WE 
+ * NEED TO CHANGE THIS TO AVOID ADDRESSING PROBLEMS. IN THAT CASE, FOR THE
+ * LOVE OF GOD DON’T NOT CHANGE IT. The possible addresses for
+ * the SensorBar are labeled on the SensorBar. You will need to do some 
+ * soldering on the SensorBar so check that out.
+ * I’m not defining the other sensors we are using because they use static addresses. You shouldn’t 
+ * be trying to change those so don’t ask me how because I will slap you or start singing cry me a
+ * river.
  */
- #define GRID_SENSOR 11
+ #define SENSOR_BAR_ADDRESS 0xE3
+
+/*
+ * these are for the PID settings. It was recommended by the all powerful 
+ * and all knowing internet that we try with something small and be 
+ * scientific about it to find the right value for us. Weird right? the
+ * internet is trying to make us learn stuff! BAHAHA weird.
+ * Anyways I set them to 1 for now and I think if we increase it the robot
+ * may get more accurate. Or not. I don’t really know, I'm just a bad-ass 
+ * programmer not a chemist.
+ */
+ #define kp 1
+ #define kd 1
+ #define ki 1
+
+/*
+ * The target is the center of the array (0-100)
+ */
+ #define TARGET 50
 
 /*
  * cog settings
@@ -97,5 +127,12 @@
  */
 #define WHITE_VALUE 42
 #define BLACK_VALUE 1020
+
+/*
+ * configuration for the color sensor. This value is what the robot will be
+ * comparing to the red box.
+ */
+
+ #define RED 6
 
 #endif
