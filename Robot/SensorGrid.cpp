@@ -31,7 +31,8 @@ SensorGrid::~SensorGrid()
  * in reality it is just turning...
  */
 State SensorGrid::calculateTurn(){
-  if(atLeftCorner()){
+	//Todo: expand for intersection cases
+	if(atLeftCorner()){
     return TURN_LEFT;
   }else if(atRightCorner()){
     return TURN_RIGHT;
@@ -58,7 +59,7 @@ int SensorGrid::checkLine(){
       }
     }
 
-    unsigned long now=millis();
+    unsigned long now = millis();
     unsigned long timeChange=(now-lastTime);
 
     error=TARGET-position;

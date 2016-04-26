@@ -137,13 +137,18 @@
  #define RED 6
 
 /*
- * configuration for the turning times for States.h
- * This is how long the motors need to turn
+ * configuration for the times for States.h
+ * This is how long the motors need to run
  */
 
 //todo: change these values
-#define RIGHT_TURN_TIME 1000
-#define LEFT_TURN_TIME 1000
+#define ROBOT1_RIGHT_TURN_TIME 1000
+#define ROBOT1_LEFT_TURN_TIME 1000
 
+#define ROBOT2_RIGHT_TURN_TIME 1000
+#define ROBOT2_LEFT_TURN_TIME 1000
+
+#define ROBOT1_EAST_STRAIGHTAWAY_TIME 2000
+#define ROBOT2_WEST_STRAIGHTAWAY_TIME 2000
 
 #endif

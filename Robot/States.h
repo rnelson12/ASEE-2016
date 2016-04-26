@@ -124,7 +124,7 @@ void turnLeftInitial(unsigned long timeStart)
 
 void turnLeft(unsigned long currentTime)
 {
-	if (currentTime >= (comparisonTime + LEFT_TURN_TIME))
+	if (currentTime >= (comparisonTime + ROBOT1_LEFT_TURN_TIME))
 	{
 		currentDirection = (currentDirection - 1) % 4;
 	}
@@ -137,7 +137,7 @@ void turnRightInitial(unsigned long timeStart)
 
 void turnRight(unsigned long currentTime)
 {
-	if (currentTime >= (comparisonTime + RIGHT_TURN_TIME))
+	if (currentTime >= (comparisonTime + ROBOT1_RIGHT_TURN_TIME))
 	{
 		currentDirection = (currentDirection + 1) % 4;
 	}
@@ -152,6 +152,9 @@ void robot1tick(unsigned long currentTime)
 	case Start:
 		currentDirection = SOUTH;
 		//no break -- fallthrough to first state
+
+	//TODO: put steps to get to line to follow
+
 	case W24:
 		drive->drive(power, FORWARD);
 		//todo: Move arms to position
@@ -344,9 +347,17 @@ void robot1tick(unsigned long currentTime)
 		drive->drive(power, FORWARD);
 		//todo: Move arms to position
 		//encoders?
-		//todo: are we at an intersection here?
-		if (sensors->calculateTurn() == TURN_RIGHT)
-			state = Stopv7;
+		//are we at an intersection here?
+		//NO
+		if (turningFlag)
+		{
+			turningFlag = false;
+			comparisonTime = currentTime;
+		}
+		if (currentTime >= (comparisonTime + ROBOT1_EAST_STRAIGHTAWAY_TIME))
+		{
+			state = Drop1v2;
+		}
 		break;
 	case Drop1v2:
 		if (Drop1())
@@ -371,7 +382,7 @@ void robot1tick(unsigned long currentTime)
 		drive->drive(power, FORWARD);
 		//todo: Move arms to finish position
 		//encoders?
-		//todo: are we at an intersection here?
+		//todo: do by time or by crossing line + time
 		if (sensors->calculateTurn() == TURN_RIGHT)
 			state = Finish;
 		break;
@@ -379,6 +390,7 @@ void robot1tick(unsigned long currentTime)
 		//todo: print error message
 		//fallthrough to finish
 	case Finish:
+		//todo: make robot stop
 		//todo: print robot is stopped (only once?)
 		break;
 	}
