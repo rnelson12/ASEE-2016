@@ -4,31 +4,28 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include "ColorSensor.h"
-//#include <EEPROM.h>
-//#include <EEPROMAnything.h>
 #include "Configure.h"
-
-//typedef unsigned char byte;
 
 class Cog
 {
 public:
-	Cog(byte numRings,byte pinNumber);
+	Cog(byte numRings,byte pinNumber,byte pressure);
 	~Cog();
 	void dropNextRing();
 	byte getNumRings();
+  boolean stopDrop();
 
 private:
-	int rotationalPosition;
 	//CSensor *colorSensor;
 	int numRingsLeft;
 	const int rotateVal = 60;
 	byte rings;
-    byte ringsLeft;
-    byte pin;
-    Servo servo;
-    int pos;
-    int nextRing;
+  byte ringsLeft;
+  byte pin;
+  Servo servo;
+  int pos;
+  int nextRing;
+  byte pressurePin;
 
 };
 

@@ -91,7 +91,10 @@
 #define LEFT_RINGS 6
 #define RIGHT_RINGS 6
 #define RIGHT_COG_PIN 9
+//pressure pins detect when the ring falls off of the thingy
+#define RIGHT_PRESSURE_PIN 11
 #define LEFT_COG_PIN 10
+#define LEFT_PRESSURE_PIN 12
 //this is the degrees that the motor needs to turn to drop another ring.
 #define NEXT_RING 180
 
