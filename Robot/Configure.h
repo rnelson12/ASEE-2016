@@ -136,4 +136,14 @@
 
  #define RED 6
 
+/*
+ * configuration for the turning times for States.h
+ * This is how long the motors need to turn
+ */
+
+//todo: change these values
+#define RIGHT_TURN_TIME 1000
+#define LEFT_TURN_TIME 1000
+
+
 #endif

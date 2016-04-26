@@ -84,10 +84,12 @@ const byte stop;
 DriveTrain* drive;
 SensorGrid* sensors;
 bool turningFlag = true;
+unsigned long comparisonTime;
+Direction currentDirection;
 
 enum Direction
 {
-	NORTH, SOUTH, EAST, WEST
+	NORTH, EAST, SOUTH, WEST
 };
 
 bool Drop2()
@@ -105,26 +107,40 @@ bool Drop1()
 //return true when successfully pointing in that direction
 bool isTurned(Direction d)
 {
-	//todo: track current direction, enact the turn to the proper direction, return true when complete
+	if (currentDirection == d)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
-void turnLeftInitial()
+void turnLeftInitial(unsigned long timeStart)
 {
-
+	comparisonTime = timeStart;
 }
 
-void turnLeft()
+void turnLeft(unsigned long currentTime)
 {
-
+	if (currentTime >= (comparisonTime + LEFT_TURN_TIME))
+	{
+		currentDirection = (currentDirection - 1) % 4;
+	}
 }
 
-void turnRightInitial()
+void turnRightInitial(unsigned long timeStart)
 {
-
+	comparisonTime = timeStart;
 }
 
-void turnRight()
+void turnRight(unsigned long currentTime)
 {
+	if (currentTime >= (comparisonTime + RIGHT_TURN_TIME))
+	{
+		currentDirection = (currentDirection + 1) % 4;
+	}
 
 }
 
@@ -134,6 +150,7 @@ void robot1tick(unsigned long currentTime)
 	switch(state)
 	{
 	case Start:
+		currentDirection = SOUTH;
 		//no break -- fallthrough to first state
 	case W24:
 		drive->drive(power, FORWARD);
@@ -160,10 +177,10 @@ void robot1tick(unsigned long currentTime)
 		}
 		else if (turningFlag) 
 		{
-			turnLeftInitial();
+			turnLeftInitial(currentTime);
 			turningFlag = false;
 		} else{
-			turnLeft();
+			turnLeft(currentTime);
 		}
 		break;
 	case S40:
@@ -198,11 +215,11 @@ void robot1tick(unsigned long currentTime)
 			turningFlag = true;
 		}
 		else if (turningFlag) {
-			turnLeftInitial();
+			turnLeftInitial(currentTime);
 			turningFlag = false;
 		}
 		else {
-			turnLeft();
+			turnLeft(currentTime);
 		}
 		break;
 	case E32:
@@ -229,11 +246,11 @@ void robot1tick(unsigned long currentTime)
 		}
 		else if (turningFlag)
 		{
-			turnLeftInitial();
+			turnLeftInitial(currentTime);
 			turningFlag = false;
 		}
 		else {
-			turnLeft();
+			turnLeft(currentTime);
 		}
 		break;
 	case N12:
@@ -255,11 +272,11 @@ void robot1tick(unsigned long currentTime)
 		}
 		else if (turningFlag)
 		{
-			turnLeftInitial();
+			turnLeftInitial(currentTime);
 			turningFlag = false;
 		}
 		else {
-			turnLeft();
+			turnLeft(currentTime);
 		}
 		break;
 	case W12:
@@ -281,11 +298,11 @@ void robot1tick(unsigned long currentTime)
 		}
 		else if (turningFlag)
 		{
-			turnRightInitial();
+			turnRightInitial(currentTime);
 			turningFlag = false;
 		}
 		else {
-			turnRight();
+			turnRight(currentTime);
 		}
 		break;
 	case N24:
@@ -316,17 +333,17 @@ void robot1tick(unsigned long currentTime)
 			turningFlag = true;
 		}
 		else if (turningFlag) {
-			turnRightInitial();
+			turnRightInitial(currentTime);
 			turningFlag = false;
 		}
 		else {
-			turnRight();
+			turnRight(currentTime);
 		}
 		break;
 	case E__:
 		drive->drive(power, FORWARD);
 		//todo: Move arms to position
-		//todo: encoders?
+		//encoders?
 		//todo: are we at an intersection here?
 		if (sensors->calculateTurn() == TURN_RIGHT)
 			state = Stopv7;
@@ -336,24 +353,24 @@ void robot1tick(unsigned long currentTime)
 			state = TurnNv3;
 		break;
 	case TurnNv3:
-		if (Turn(NORTH)) {
+		if (isTurned(NORTH)) {
 			state = N12v2;
 			turningFlag = true;
 		}
 		else if (turningFlag)
 		{
-			turnLeftInitial();
+			turnLeftInitial(currentTime);
 			turningFlag = false;
 		}
 		else {
-			turnLeft();
+			turnLeft(currentTime);
 		}
 			
 		break;
 	case N12v2:
 		drive->drive(power, FORWARD);
 		//todo: Move arms to finish position
-		//todo: encoders?
+		//encoders?
 		//todo: are we at an intersection here?
 		if (sensors->calculateTurn() == TURN_RIGHT)
 			state = Finish;
