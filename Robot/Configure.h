@@ -103,7 +103,8 @@
 #define RIGHT_MOTOR_POWER 100
 #define RIGHT_WHEEL_PIN 5
 #define RIGHT_REVERSE_PIN 7
-#define RIGHT_WHEEL_OFFSET 0
+//offset may be a function
+#define RIGHT_WHEEL_OFFSET 30
 //this one is a percent!! NOT a value so dont fuck up
 #define RIGHT_ADJUSTMENT 10
 
