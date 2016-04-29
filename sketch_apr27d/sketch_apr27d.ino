@@ -1,13 +1,12 @@
-#include <Wire.h>
-#include "sensorbar.h"
-
-SensorBar bar(0x3E);
 double kp=.5;
 double ki=.5;
 double kd=.5;
 
-int RBaseSpeed=80;
-int LBaseSpeed=50;
+byte left=6;
+byte right=7;
+
+int RBaseSpeed=105;
+int LBaseSpeed=105;
 byte RMotor=10;
 byte LMotor=11;
 
@@ -15,44 +14,32 @@ double error=0;
 double errSum=0;
 double lastError=0;
 int lastTime=0;
-int TARGET=B00011000;
+int TARGET=0;
 double dErr=0;
 
 void setup() {
   pinMode(RMotor,OUTPUT);
   pinMode(LMotor,OUTPUT);
+  pinMode(left,INPUT);
+  pinMode(right,INPUT);
   Serial.begin(9600);
-  bar.setBarStrobe();
-  bar.clearInvertBits();
-  if(bar.begin()){
-    Serial.print("ready");
-  }else{
-    Serial.print("not ready");
-  }
-  delay(5000);
+
+  delay(3000);
+  analogWrite(RMotor,RBaseSpeed);
+  analogWrite(LMotor,LBaseSpeed);
 }
 
 void loop() {
-  uint8_t raw=bar.getRaw();
 
-  /*for(int i=0;i<7;i++){
-    Serial.print(bitRead(raw,i));
-  }
-  Serial.println();
-  delay(500);*/
-
-  if(bitRead(raw,2)||bitRead(raw,1)||bitRead(raw,0)){
-    //turn right
-    analogWrite(RMotor,RBaseSpeed);
-    analogWrite(LMotor,LBaseSpeed+30);
-  }else if(bitRead(raw,5)||bitRead(raw,6)||bitRead(raw,7)){
+  /*if(l){
     analogWrite(RMotor,RBaseSpeed+30);
-    analogWrite(LMotor,LBaseSpeed);
-  }else if(bitRead(raw,3)||bitRead(raw,4)){
+    analogWrite(RMotor,LBaseSpeed);
+  }else if(r){
     analogWrite(RMotor,RBaseSpeed);
-    analogWrite(LMotor,LBaseSpeed);
+    analogWrite(RMotor,LBaseSpeed+30);
   }
 
+  delayMicroseconds(10);*/
     /*unsigned long now=millis();
     unsigned long timeChange=(now-lastTime);
 
@@ -60,7 +47,7 @@ void loop() {
     errSum+=(error*timeChange);
     dErr=(error-lastError)/timeChange;
 
-    lastError=error;  
+    lastError=error;
     lastTime=now;
 
     //TODO figure out how to write result to motors
@@ -86,7 +73,7 @@ void loop() {
     }
     
     analogWrite(RMotor,RMotorSpeed);
-    analogWrite(LMotor,LMotorSpeed);*/
+    analogWrite(LMotor,LMotorSpeed);
 
-    delayMicroseconds(100);
+    delayMicroseconds(10);*/
 }
