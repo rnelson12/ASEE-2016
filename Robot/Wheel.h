@@ -12,7 +12,7 @@ class Wheel
 public:
 	Wheel(byte motorForward, byte motorBackward, byte radius, byte power);
 	~Wheel();
-	void setPower(byte powerValue);
+	void setPower(byte powerValue,bool forward);//1 forward, 0 backward
 	int calculateDistance();
 private:
 	byte _radius;

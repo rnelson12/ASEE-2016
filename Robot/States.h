@@ -7,6 +7,8 @@
 enum Robot1State
 {
 	Start = 0,
+	InitialWest,
+	CenteringNorth,
 	W24,
 	Stopv1,
 	Drop2v1,
@@ -44,6 +46,8 @@ enum Robot1State
 const char* Robot1StateNames[] =
 {
 	"Start",
+	"InitialWest"
+	"CenteringNorth"
 	"W24",
 	"Stopv1",
 	"Drop2v1",
@@ -150,11 +154,22 @@ void robot1tick(unsigned long currentTime)
 	switch(state)
 	{
 	case Start:
-		currentDirection = SOUTH;
+		currentDirection = WEST;
 		//no break -- fallthrough to first state
 
-	//TODO: put steps to get to line to follow
+	//TODO: implement InitialWest
+	case InitialWest:
+		//if( FRONT SENSORS READ A LINE)
+		//		state = CenteringNorth;
 
+		break;
+	//TODO: implement CenteringNorth
+	case CenteringNorth:
+		if(isTurned(NORTH));
+		{
+			state = W24;
+		}
+		break;
 	case W24:
 		drive->drive(power, FORWARD);
 		//todo: Move arms to position
@@ -394,7 +409,7 @@ void robot1tick(unsigned long currentTime)
 		//todo: print robot is stopped (only once?)
 		break;
 	}
-	//todo: print the state (e.g.:
+	//todo: print the state? (e.g.:
 		//printf(Robot1StateNames[state]);
 }
 #endif 
