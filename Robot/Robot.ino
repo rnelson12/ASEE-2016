@@ -23,8 +23,8 @@ void setup()
   /* add setup code here */
 	Serial.begin(9600);
 
-	cog1 = new Cog(LEFT_RINGS,RIGHT_COG_PIN);
-	cog2 = new Cog(RIGHT_RINGS,LEFT_COG_PIN);
+	cog1 = new Cog(LEFT_RINGS,LEFT_COG_PIN, LEFT_PRESSURE_PIN);
+	cog2 = new Cog(RIGHT_RINGS,RIGHT_COG_PIN, RIGHT_PRESSURE_PIN);
 	base = new DriveTrain(RIGHT_MOTOR_POWER,LEFT_MOTOR_POWER);
 
   if(!ROBOT_DIRECTION){

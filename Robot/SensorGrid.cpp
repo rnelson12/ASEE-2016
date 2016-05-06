@@ -39,7 +39,7 @@ State SensorGrid::calculateTurn(){
   }else if(atIntersection()){
     //most likly go forward...not sure if it needs to turn or not...
     //this needs to be expanded, there will be turns here too.
-    return FORWARD;
+    return INTERSECTION;
   }
   return CONTINUE;
 }

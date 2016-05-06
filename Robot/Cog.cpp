@@ -1,49 +1,46 @@
 #include"Cog.h"
 
-Cog::Cog(byte numRings, byte pinNumberSpiral, byte pinNumberArm){
+Cog::Cog(byte numRings, byte pinNumberSpiral, byte pinNumberArm, byte pressure){
   ringsStarted = numRings;
+  ringsRemaining = numRIngs;
   armPin = pinNumberArm;
   spiralPin = pinNumberSpiral;
   arm.attach(armPin);
-  rightArm.attach(rightArmPin);
-  leftSpiral.attach(leftSpiralPin);
-  rightSpiral.attach(rightSpiralPin);
+  spiral.attach(spiralPin);
   //90 is no movment
-  pos=90;
   nextRing=NEXT_RING;
+  pressurePin = pressure;
   //get nextRing from config file
 }
 
-bool Cog::dropNextRingLeft(){
+void Cog::dropNextRing(){
   //so...If its 180 it will go in full speed in one direction and 0 is 
   //full speed in the other direction
   //It would probably need to write a position then add 90 or 180 or whatever
   //then write it again
 	//TODO: continuous servos are done by time
-  leftSpiral.write(pos);
+  spiral.write(pos);
   pos+=90;
+  spiral.write(200);
   //probably best if the robot is stuck dropping the ring before it moves
   //maybe a forloop waiting for it to finish
 
-  ringsRemainingLeft--;
-  return true;
-}
-
-bool Cog::dropNextRingRight() {
-	//so...If its 180 it will go in full speed in one direction and 0 is 
-	//full speed in the other direction
-	//It would probably need to write a position then add 90 or 180 or whatever
-	//then write it again
-	//Todo: continous servos done by time
-	rightSpiral.write(pos);
-	pos += 90;
-	//probably best if the robot is stuck dropping the ring before it moves
-	//maybe a forloop waiting for it to finish
-
-	ringsRemainingRight--;
-	return true;
+  ringsRemaining--;
+  //return true;
 }
 
 byte Cog::getNumRings(){
-  return (ringsRemainingLeft + ringsRemainingRight);
+  return (ringsRemaining);
 }
+
+bool Cog::stopDrop(){
+  if(digitalRead(pressurePin)==HIGH){
+    servo.write(0);
+    return true;
+  }
+}
+
+bool Cog::turnArm(int angle){
+  
+}
+ 

@@ -92,7 +92,10 @@
 #define LEFT_RINGS 6
 #define RIGHT_RINGS 6
 #define RIGHT_COG_PIN 9
+//pressure pins detect when the ring falls off of the thingy
+#define RIGHT_PRESSURE_PIN 11
 #define LEFT_COG_PIN 10
+#define LEFT_PRESSURE_PIN 12
 //this is the degrees that the motor needs to turn to drop another ring.
 #define NEXT_RING 180
 
@@ -104,7 +107,8 @@
 #define RIGHT_MOTOR_POWER 100
 #define RIGHT_WHEEL_PIN 5
 #define RIGHT_REVERSE_PIN 7
-#define RIGHT_WHEEL_OFFSET 0
+//offset may be a function
+#define RIGHT_WHEEL_OFFSET 30
 //this one is a percent!! NOT a value so dont fuck up
 #define RIGHT_ADJUSTMENT 10
 
