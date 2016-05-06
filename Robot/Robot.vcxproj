@@ -125,9 +125,14 @@
   <ItemGroup>
     <ClInclude Include="Cog.h" />
     <ClInclude Include="ColorSensor.h" />
+    <ClInclude Include="Configure.h" />
     <ClInclude Include="Drivetrain.h" />
     <ClInclude Include="Sensor.h" />
+    <ClInclude Include="Sensorbar.h" />
     <ClInclude Include="SensorGrid.h" />
+    <ClInclude Include="States.h" />
+    <ClInclude Include="States2.h" />
+    <ClInclude Include="Types.h" />
     <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +140,7 @@
     <ClCompile Include="ColorSensor.cpp" />
     <ClCompile Include="Drivetrain.cpp" />
     <ClCompile Include="Sensor.cpp" />
+    <ClCompile Include="Sensorbar.cpp" />
     <ClCompile Include="SensorGrid.cpp" />
     <ClCompile Include="Wheel.cpp" />
   </ItemGroup>

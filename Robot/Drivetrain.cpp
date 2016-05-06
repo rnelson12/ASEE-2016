@@ -9,21 +9,21 @@ DriveTrain::DriveTrain(int defaultLeftPower,int defaultRightPower){
 
 void DriveTrain::drive(byte power, State direction){
   if(direction==TURN_LEFT){
-    right->setPower(power);
-    left->setPower(-power);
+    right->setPower(power, 1);
+    left->setPower(power, 0);
   }else if(direction==TURN_RIGHT){
-    left->setPower(power);
-    right->setPower(-power);
+    left->setPower(power, 1);
+    right->setPower(power, 0);
   }else if(direction==FORWARD){
-    right->setPower(power);
-    left->setPower(power); //probably need to either have a set direction
+    right->setPower(power, 1);
+    left->setPower(power, 1); //probably need to either have a set direction
     //or make this a signed int so negative is in the oposite direction
   }else if(direction==ADJUST_LEFT){
-    right->setPower(power+RIGHT_ADJUSTMENT);
-    left->setPower(power);
+    right->setPower(power+RIGHT_ADJUSTMENT, 1);
+    left->setPower(power, 1);
   }else if(direction==ADJUST_RIGHT){
-    right->setPower(power);
-    left->setPower(power+ADJUST_LEFT);
+    right->setPower(power, 1);
+    left->setPower(power+ADJUST_LEFT, 1);
   }
 }
 

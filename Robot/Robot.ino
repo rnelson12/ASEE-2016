@@ -5,10 +5,12 @@
 #include "Configure.h"
 #include <Servo.h>
 #include <Wire.h>
+#include "States.h"
 
 unsigned long elapsedTime = 0;
 Cog *cog1;
 Cog *cog2;
+States states1;
 DriveTrain *base;
 const byte moveSize=8;
 State moves[8];
@@ -21,8 +23,8 @@ void setup()
   /* add setup code here */
 	Serial.begin(9600);
 
-	cog1 = new Cog(LEFT_RINGS,RIGHT_COG_PIN);
-	cog2 = new Cog(RIGHT_RINGS,LEFT_COG_PIN);
+	cog1 = new Cog(LEFT_RINGS,LEFT_COG_PIN, LEFT_PRESSURE_PIN);
+	cog2 = new Cog(RIGHT_RINGS,RIGHT_COG_PIN, RIGHT_PRESSURE_PIN);
 	base = new DriveTrain(RIGHT_MOTOR_POWER,LEFT_MOTOR_POWER);
 
   if(!ROBOT_DIRECTION){
@@ -44,12 +46,9 @@ void loop()
   //then adjust using the adjustment method in drivetrain
   //then turn using the drive method in drivetrain
 
-  /*State upcomingTurn=base->sensors->calculateTurn();
-  if(upcommingTurn==moves[i]){
-    base->drive(MAX_POWER,moves[i]);
-    i++;
-  }
-	elapsedTime = millis();*/
+  elapsedTime = millis();
+  states1->robot1tick(elapsedTime);
+	*/
 }
 
 void debug(){

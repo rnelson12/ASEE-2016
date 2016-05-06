@@ -2,6 +2,7 @@
 
 Sensor::Sensor(int sensorPin) {
 	pin = sensorPin;
+  pinMode(pin, INPUT);
 }
 
 Sensor::~Sensor()

@@ -15,6 +15,7 @@ typedef enum {
 	TURN_LEFT,
 	TURN_RIGHT,
 	FORWARD,
+  INTERSECTION,
 	CONTINUE
 } State;
 

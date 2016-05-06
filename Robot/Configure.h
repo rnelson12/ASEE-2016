@@ -69,9 +69,9 @@
  * may get more accurate. Or not. I don’t really know, I'm just a bad-ass 
  * programmer not a chemist.
  */
- #define kp 1
- #define kd 1
- #define ki 1
+ #define kp 0
+ #define kd 0
+ #define ki 0
 
 /*
  * The target is the center of the array (0-100)
@@ -92,7 +92,10 @@
 #define LEFT_RINGS 6
 #define RIGHT_RINGS 6
 #define RIGHT_COG_PIN 9
+//pressure pins detect when the ring falls off of the thingy
+#define RIGHT_PRESSURE_PIN 11
 #define LEFT_COG_PIN 10
+#define LEFT_PRESSURE_PIN 12
 //this is the degrees that the motor needs to turn to drop another ring.
 #define NEXT_RING 180
 
@@ -104,7 +107,8 @@
 #define RIGHT_MOTOR_POWER 100
 #define RIGHT_WHEEL_PIN 5
 #define RIGHT_REVERSE_PIN 7
-#define RIGHT_WHEEL_OFFSET 0
+//offset may be a function
+#define RIGHT_WHEEL_OFFSET 30
 //this one is a percent!! NOT a value so dont fuck up
 #define RIGHT_ADJUSTMENT 10
 
@@ -135,5 +139,20 @@
  */
 
  #define RED 6
+
+/*
+ * configuration for the times for States.h
+ * This is how long the motors need to run
+ */
+
+//todo: change these values
+#define ROBOT1_RIGHT_TURN_TIME 1000
+#define ROBOT1_LEFT_TURN_TIME 1000
+
+#define ROBOT2_RIGHT_TURN_TIME 1000
+#define ROBOT2_LEFT_TURN_TIME 1000
+
+#define ROBOT1_EAST_STRAIGHTAWAY_TIME 2000
+#define ROBOT2_WEST_STRAIGHTAWAY_TIME 2000
 
 #endif
