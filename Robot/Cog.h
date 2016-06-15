@@ -10,7 +10,6 @@ class Cog
 {
 public:
 	Cog(byte numRings, byte pinNumberSpiral, byte pinNumberArm, byte pressure);
-	~Cog();
 	void dropNextRing();
 	byte getNumRings();
 	bool turnArm(int angle);

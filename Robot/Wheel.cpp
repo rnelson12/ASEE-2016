@@ -12,10 +12,15 @@ Wheel::~Wheel()
 {
 }
 
-void Wheel::setPower(byte powerValue)
+void Wheel::setPower(byte powerValue,bool forward)
 {
+  byte power=map(powerValue,0,100,0,225);
 	_power = powerValue;
-  analogWrite(_motorPinForward,powerValue);
+  if(forward){
+    analogWrite(_motorPinForward,power);
+  }else{
+    analogWrite(_motorPinBackward,power);
+  }
 }
 
 int Wheel::calculateDistance()
