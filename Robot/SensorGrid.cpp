@@ -49,27 +49,21 @@ State SensorGrid::calculateTurn(){
   returns motorSpeed so I think thats just something that you plug into
   the left or right motors...
 */
-int SensorGrid::checkLine(){
+State SensorGrid::checkLine(){
 
-    uint8_t raw=sensorBar->getPosition();
-    position=0;
-    for(byte i=0;i<7;i++){
-      if(bitRead(raw,i)){
-        position+=10;
-      }
-    }
+  uint8_t raw=sensorBar->getRaw();
 
-    unsigned long now = millis();
-    unsigned long timeChange=(now-lastTime);
-
-    error=TARGET-position;
-    errSum+=(error*timeChange);
-    dErr=(error-lastError)/timeChange;
-
-    lastError=error;
-    lastTime=now;
+  if(bitRead(raw,2)||bitRead(raw,1)||bitRead(raw,0)){
+    //turn right
     
-    return kp*error+ki*errSum+kd*dErr;
+  }else if(bitRead(raw,5)||bitRead(raw,6)||bitRead(raw,7)){
+    //turn left
+    
+  }else if(bitRead(raw,3)||bitRead(raw,4)){
+    
+  }
+
+  return NO_ADJUST;
 }
 
 /*

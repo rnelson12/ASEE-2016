@@ -6,12 +6,14 @@
 #include <Servo.h>
 #include <Wire.h>
 #include "States.h"
+#include "SensorGrid.h"
 
 unsigned long elapsedTime = 0;
-Cog *cog1;
-Cog *cog2;
+Cog cog1(LEFT_RINGS,LEFT_SPIRAL_PIN,LEFT_ARM_PIN, LEFT_PRESSURE_PIN);
+Cog cog2(RIGHT_RINGS,RIGHT_SPIRAL_PIN,RIGHT_ARM_PIN, RIGHT_PRESSURE_PIN);
 States states1;
-DriveTrain *base;
+DriveTrain base(RIGHT_MOTOR_POWER,LEFT_MOTOR_POWER);
+SensorGrid grid;
 const byte moveSize=8;
 State moves[8];
 State RIGHT_MOVES[]={TURN_LEFT,TURN_LEFT,FORWARD,TURN_LEFT,TURN_LEFT,TURN_LEFT,TURN_RIGHT,FORWARD,TURN_RIGHT};
@@ -23,9 +25,11 @@ void setup()
   /* add setup code here */
 	Serial.begin(9600);
 
-	cog1 = new Cog(LEFT_RINGS,LEFT_COG_PIN, LEFT_PRESSURE_PIN);
-	cog2 = new Cog(RIGHT_RINGS,RIGHT_COG_PIN, RIGHT_PRESSURE_PIN);
-	base = new DriveTrain(RIGHT_MOTOR_POWER,LEFT_MOTOR_POWER);
+	//cog1 = Cog(LEFT_RINGS,LEFT_SPIRAL_PIN,LEFT_ARM_PIN, LEFT_PRESSURE_PIN);
+	//cog2 = Cog(RIGHT_RINGS,RIGHT_SPIRAL_PIN,RIGHT_ARM_PIN, RIGHT_PRESSURE_PIN);
+	//base = DriveTrain(RIGHT_MOTOR_POWER,LEFT_MOTOR_POWER);
+
+  grid = SensorGrid();
 
   if(!ROBOT_DIRECTION){
     memcpy( RIGHT_MOVES, moves, moveSize);
@@ -46,9 +50,16 @@ void loop()
   //then adjust using the adjustment method in drivetrain
   //then turn using the drive method in drivetrain
 
+  State correction=grid.checkLine();
+
+  if(correction==ADJUST_LEFT){
+    base.drive(HALF_POWER,ADJUST_LEFT);
+  }else if(correction=ADJUST_RIGHT){
+    base.drive(HALF_POWER,ADJUST_RIGHT);
+  }
+
   elapsedTime = millis();
-  states1->robot1tick(elapsedTime);
-	*/
+  states1.robot1tick(elapsedTime,base);
 }
 
 void debug(){

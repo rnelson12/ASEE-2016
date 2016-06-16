@@ -2,7 +2,7 @@
 
 Cog::Cog(byte numRings, byte pinNumberSpiral, byte pinNumberArm, byte pressure){
   ringsStarted = numRings;
-  ringsRemaining = numRIngs;
+  ringsRemaining = numRings;
   armPin = pinNumberArm;
   spiralPin = pinNumberSpiral;
   arm.attach(armPin);
@@ -35,7 +35,7 @@ byte Cog::getNumRings(){
 
 bool Cog::stopDrop(){
   if(digitalRead(pressurePin)==HIGH){
-    servo.write(0);
+    spiral.write(0);
     return true;
   }
 }

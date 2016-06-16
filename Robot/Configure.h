@@ -61,24 +61,6 @@
  #define SENSOR_BAR_ADDRESS 0xE3
 
 /*
- * these are for the PID settings. It was recommended by the all powerful 
- * and all knowing internet that we try with something small and be 
- * scientific about it to find the right value for us. Weird right? the
- * internet is trying to make us learn stuff! BAHAHA weird.
- * Anyways I set them to 1 for now and I think if we increase it the robot
- * may get more accurate. Or not. I don’t really know, I'm just a bad-ass 
- * programmer not a chemist.
- */
- #define kp 0
- #define kd 0
- #define ki 0
-
-/*
- * The target is the center of the array (0-100)
- */
- #define TARGET 50
-
-/*
  * cog settings
  */
 
@@ -88,14 +70,17 @@
 #define HALF_POWER 50
 #define QUARTER_POWER 25
 #define LOW_POWER 10
+#define NO_POWER 0
  
 #define LEFT_RINGS 6
 #define RIGHT_RINGS 6
-#define RIGHT_COG_PIN 9
+#define RIGHT_SPIRAL_PIN 9
 //pressure pins detect when the ring falls off of the thingy
 #define RIGHT_PRESSURE_PIN 11
-#define LEFT_COG_PIN 10
+#define RIGHT_ARM_PIN 7
+#define LEFT_SPIRAL_PIN 10
 #define LEFT_PRESSURE_PIN 12
+#define LEFT_ARM_PIN 8
 //this is the degrees that the motor needs to turn to drop another ring.
 #define NEXT_RING 180
 
@@ -107,9 +92,9 @@
 #define RIGHT_MOTOR_POWER 100
 #define RIGHT_WHEEL_PIN 5
 #define RIGHT_REVERSE_PIN 7
-//offset may be a function
+//offset is used so that the wheels are aligned
 #define RIGHT_WHEEL_OFFSET 30
-//this one is a percent!! NOT a value so dont fuck up
+//this is used for adjusting during line following
 #define RIGHT_ADJUSTMENT 10
 
 /*
@@ -118,8 +103,9 @@
 #define LEFT_MOTOR_POWER 100
 #define LEFT_WHEEL_PIN 6
 #define LEFT_REVERSE_PIN 8
+//offset is used so that the wheels are aligned
 #define LEFT_WHEEL_OFFSET 0
-//this one is a percent!! NOT a value so dont fuck up
+//this is used for adjusting during line following
 #define LEFT_ADJUSTMENT 10
 
 /*

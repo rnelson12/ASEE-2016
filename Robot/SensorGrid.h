@@ -1,11 +1,10 @@
-#ifndef SENSORGRID_H
-#define SENSORGRID_h
+#ifndef SensorGrid_h
+#define SensorGrid_h
 
 #include <Arduino.h>
 #include "Types.h"
 #include "Sensorbar.h"
 #include "Configure.h"
-//typedef unsigned char byte;
 
 class SensorGrid
 {
@@ -13,7 +12,7 @@ public:
 	SensorGrid();
 	~SensorGrid();
 	State calculateTurn();
-	int checkLine();
+	State checkLine();
 	void begin();
 
 private:

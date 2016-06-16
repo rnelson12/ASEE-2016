@@ -4,6 +4,10 @@
 #include "Drivetrain.h"
 #include "SensorGrid.h"
 
+class States{
+
+public:
+
 enum Robot1State
 {
 	Start = 0,
@@ -43,7 +47,7 @@ enum Robot1State
 	ERROR
 };
 
-const char* Robot1StateNames[] =
+const char* Robot1StateNames[34] =
 {
 	"Start",
 	"InitialWest"
@@ -83,33 +87,49 @@ const char* Robot1StateNames[] =
 };
 
 Robot1State state;
-const byte power;
-const byte stop;
-DriveTrain* drive;
-SensorGrid* sensors;
+const byte power=HALF_POWER;
+const byte stop=NO_POWER;
+SensorGrid sensors;
 bool turningFlag = true;
 unsigned long comparisonTime;
-Direction currentDirection;
 
-enum Direction
+enum Direction : int
 {
-	NORTH, EAST, SOUTH, WEST
+	NORTH=0, EAST, SOUTH, WEST
 };
 
-bool Drop2()
+Direction currentDirection;
+
+States();
+bool Drop2();
+bool Drop1();
+bool isTurned(Direction d);
+void turnLeftInitial(unsigned long startTime);
+void turnLeft(unsigned long currentTime);
+void turnRightInitial(unsigned long startTime);
+void turnRight(unsigned long currentTime);
+void robot1tick(unsigned long currentTime,DriveTrain drive);
+
+};
+
+States::States(){
+  
+}
+
+bool States::Drop2()
 {
 	//todo: drop 2 rings
 	//return true when finished
 }
 
-bool Drop1()
+bool States::Drop1()
 {
 	//todo: drop 1 ring
 	//return true when finished
 }
 
 //return true when successfully pointing in that direction
-bool isTurned(Direction d)
+bool States::isTurned(Direction d)
 {
 	if (currentDirection == d)
 	{
@@ -121,35 +141,35 @@ bool isTurned(Direction d)
 	}
 }
 
-void turnLeftInitial(unsigned long timeStart)
+void States::turnLeftInitial(unsigned long timeStart)
 {
 	comparisonTime = timeStart;
 }
 
-void turnLeft(unsigned long currentTime)
+void States::turnLeft(unsigned long currentTime)
 {
 	if (currentTime >= (comparisonTime + ROBOT1_LEFT_TURN_TIME))
 	{
-		currentDirection = (currentDirection - 1) % 4;
+		currentDirection = (Direction)((currentDirection - 1) % 4);
 	}
 }
 
-void turnRightInitial(unsigned long timeStart)
+void States::turnRightInitial(unsigned long timeStart)
 {
 	comparisonTime = timeStart;
 }
 
-void turnRight(unsigned long currentTime)
+void States::turnRight(unsigned long currentTime)
 {
 	if (currentTime >= (comparisonTime + ROBOT1_RIGHT_TURN_TIME))
 	{
-		currentDirection = (currentDirection + 1) % 4;
+		currentDirection = (Direction)((currentDirection + 1) % 4);
 	}
 
 }
 
 
-void robot1tick(unsigned long currentTime)
+void States::robot1tick(unsigned long currentTime,DriveTrain drive)
 {
 	switch(state)
 	{
@@ -171,14 +191,14 @@ void robot1tick(unsigned long currentTime)
 		}
 		break;
 	case W24:
-		drive->drive(power, FORWARD);
+		drive.drive(power, FORWARD);
 		//todo: Move arms to position
 		//encoders?
-		if (sensors->calculateTurn() == TURN_LEFT)
+		if (sensors.calculateTurn() == TURN_LEFT)
 			state = Stopv1;
 		break;
 	case Stopv1:
-		drive->drive(stop, FORWARD);
+		drive.drive(stop, FORWARD);
 		//may need to do braking here
 		state = Drop2v1;
 		break;
@@ -202,8 +222,8 @@ void robot1tick(unsigned long currentTime)
 		}
 		break;
 	case S40:
-		drive->drive(power, FORWARD);
-		if (sensors->calculateTurn() == FORWARD)
+		drive.drive(power, FORWARD);
+		if (sensors.calculateTurn() == FORWARD)
 			state = Straight;
 		break;
 	case Straight:
@@ -211,14 +231,14 @@ void robot1tick(unsigned long currentTime)
 		//no break -- fallthrough to S40v2,
 		//unless we need to specifically move past the intersection
 	case S40v2:
-		drive->drive(power, FORWARD);
+		drive.drive(power, FORWARD);
 		//todo: Move arms to position
 		//encoders?
-		if (sensors->calculateTurn() == TURN_LEFT)
+		if (sensors.calculateTurn() == TURN_LEFT)
 			state = Stopv2;
 		break;
 	case Stopv2:
-		drive->drive(stop, FORWARD);
+		drive.drive(stop, FORWARD);
 		//may need to do braking here
 		state = Drop2v2;
 		break;
@@ -241,14 +261,14 @@ void robot1tick(unsigned long currentTime)
 		}
 		break;
 	case E32:
-		drive->drive(power, FORWARD);
+		drive.drive(power, FORWARD);
 		//todo: Move arm to position
 		//encoders?
-		if (sensors->calculateTurn() == TURN_LEFT)
+		if (sensors.calculateTurn() == TURN_LEFT)
 			state = Stopv3;
 		break;
 	case Stopv3:
-		drive->drive(stop, FORWARD);
+		drive.drive(stop, FORWARD);
 		//may need to do braking here
 		state = Drop1v1;
 		break;
@@ -273,12 +293,12 @@ void robot1tick(unsigned long currentTime)
 		break;
 	case N12:
 		//todo: check that we are looking for the right intersection
-		drive->drive(power, FORWARD);
-		if (sensors->calculateTurn() == FORWARD)
+		drive.drive(power, FORWARD);
+		if (sensors.calculateTurn() == FORWARD)
 			state = Stopv4;
 		break;
 	case Stopv4:
-		drive->drive(stop, FORWARD);
+		drive.drive(stop, FORWARD);
 		//may need to do braking here
 		state = TurnW;
 		break;
@@ -299,12 +319,12 @@ void robot1tick(unsigned long currentTime)
 		break;
 	case W12:
 		//todo: check that we are looking for the right intersection
-		drive->drive(power, FORWARD);
-		if (sensors->calculateTurn() == TURN_RIGHT)
+		drive.drive(power, FORWARD);
+		if (sensors.calculateTurn() == TURN_RIGHT)
 			state = Stopv6;
 		break;
 	case Stopv5:
-		drive->drive(stop, FORWARD);
+		drive.drive(stop, FORWARD);
 		//may need to do braking here
 		state = TurnNv2;
 		break;
@@ -324,8 +344,8 @@ void robot1tick(unsigned long currentTime)
 		}
 		break;
 	case N24:
-		drive->drive(power, FORWARD);
-		if (sensors->calculateTurn() == FORWARD)
+		drive.drive(power, FORWARD);
+		if (sensors.calculateTurn() == FORWARD)
 			state = Straightv2;
 		break;
 	case Straightv2:
@@ -333,15 +353,15 @@ void robot1tick(unsigned long currentTime)
 		//no break -- fallthrough to N24v2,
 		//unless we need to specifically move past the intersection
 	case N24v2:
-		drive->drive(power, FORWARD);
+		drive.drive(power, FORWARD);
 		//todo: Move arms to position
 		//encoders?
 		//are we at an intersection here?
-		if (sensors->calculateTurn() == TURN_RIGHT)
+		if (sensors.calculateTurn() == TURN_RIGHT)
 			state = Stopv6;
 		break;
 	case Stopv6:
-		drive->drive(stop, FORWARD);
+		drive.drive(stop, FORWARD);
 		//may need to do braking here
 		state = TurnEv2;
 		break;
@@ -359,7 +379,7 @@ void robot1tick(unsigned long currentTime)
 		}
 		break;
 	case E__:
-		drive->drive(power, FORWARD);
+		drive.drive(power, FORWARD);
 		//todo: Move arms to position
 		//encoders?
 		//are we at an intersection here?
@@ -394,11 +414,11 @@ void robot1tick(unsigned long currentTime)
 			
 		break;
 	case N12v2:
-		drive->drive(power, FORWARD);
+		drive.drive(power, FORWARD);
 		//todo: Move arms to finish position
 		//encoders?
 		//todo: do by time or by crossing line + time
-		if (sensors->calculateTurn() == TURN_RIGHT)
+		if (sensors.calculateTurn() == TURN_RIGHT)
 			state = Finish;
 		break;
 	default:
