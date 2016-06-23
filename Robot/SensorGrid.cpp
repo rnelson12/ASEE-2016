@@ -4,25 +4,16 @@
 	need to make sure that the first 4 are line followers
 	and the rest are the turning calculators.
 */
-void SensorGrid::begin(){
-  sensorBar=new SensorBar(SENSOR_BAR_ADDRESS);
-  sensorBar->setBarStrobe();
-  sensorBar->clearInvertBits();
-  uint8_t returnStatus=sensorBar->begin();
+SensorGrid::SensorGrid(){
+  sensorBar=SensorBar(SENSOR_BAR_ADDRESS);
+  sensorBar.setBarStrobe();
+  sensorBar.clearInvertBits();
+  uint8_t returnStatus=sensorBar.begin();
   if(returnStatus){
     //log("IR Bar communication OK");
   }else{
     //log("IR Bar communication failed :(");
   }
-}
-
-SensorGrid::SensorGrid()
-{
-  //Todo: 
-}
-
-SensorGrid::~SensorGrid()
-{
 }
 
 /*
@@ -51,14 +42,14 @@ State SensorGrid::calculateTurn(){
 */
 State SensorGrid::checkLine(){
 
-  uint8_t raw=sensorBar->getRaw();
+  uint8_t raw=sensorBar.getRaw();
 
   if(bitRead(raw,2)||bitRead(raw,1)||bitRead(raw,0)){
     //turn right
-    
+    return ADJUST_RIGHT;
   }else if(bitRead(raw,5)||bitRead(raw,6)||bitRead(raw,7)){
     //turn left
-    
+    return ADJUST_LEFT;
   }else if(bitRead(raw,3)||bitRead(raw,4)){
     
   }
@@ -77,7 +68,7 @@ bool SensorGrid::atIntersection(){
 	  return true;
   }
   */
-  uint8_t raw=sensorBar->getRaw();
+  uint8_t raw=sensorBar.getRaw();
   //should be the very left bit
   if(bitRead(raw,0)&&bitRead(raw,7)){
     return true;
@@ -90,7 +81,7 @@ boolean SensorGrid::atLeftCorner(){
   /*if(grid[6].getValue()==BLACK){
     return true;
   }*/
-  if(sensorBar->getPosition()<-50){
+  if(sensorBar.getPosition()<-50){
     return true;
   }
   return false;
@@ -101,7 +92,7 @@ boolean SensorGrid::atRightCorner(){
   /*if(grid[7].getValue()==BLACK){
     return true;
   }*/
-  if(sensorBar->getPosition()>50){
+  if(sensorBar.getPosition()>50){
     return true;
   }
   return false;

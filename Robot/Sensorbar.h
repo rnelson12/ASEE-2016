@@ -41,7 +41,7 @@ class SensorBar
 {
   public:
     //New functions for bar specific operation
-    SensorBar( uint8_t address, uint8_t resetPin = 255, uint8_t interruptPin = 255, uint8_t oscillatorPin = 255 );
+    SensorBar( uint8_t address, uint8_t resetPin=255, uint8_t interruptPin=255, uint8_t oscillatorPin=255 );
     uint8_t begin( void );
     uint8_t getRaw( void );
     int8_t getPosition( void );

@@ -29,8 +29,6 @@ void setup()
 	//cog2 = Cog(RIGHT_RINGS,RIGHT_SPIRAL_PIN,RIGHT_ARM_PIN, RIGHT_PRESSURE_PIN);
 	//base = DriveTrain(RIGHT_MOTOR_POWER,LEFT_MOTOR_POWER);
 
-  grid = SensorGrid();
-
   if(!ROBOT_DIRECTION){
     memcpy( RIGHT_MOVES, moves, moveSize);
   }else{
@@ -54,12 +52,16 @@ void loop()
 
   if(correction==ADJUST_LEFT){
     base.drive(HALF_POWER,ADJUST_LEFT);
-  }else if(correction=ADJUST_RIGHT){
+  }else if(correction==ADJUST_RIGHT){
     base.drive(HALF_POWER,ADJUST_RIGHT);
+  }else{
+    base.drive(HALF_POWER,FORWARD);
   }
 
   elapsedTime = millis();
   states1.robot1tick(elapsedTime,base);
+
+  delay(100);
 }
 
 void debug(){

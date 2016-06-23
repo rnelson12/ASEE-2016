@@ -13,7 +13,6 @@ public:
 	~SensorGrid();
 	State calculateTurn();
 	State checkLine();
-	void begin();
 
 private:
 	bool atIntersection();
@@ -21,7 +20,7 @@ private:
 	bool atRightCorner();
 	bool adjusting;
   static const byte numSensors=8;
-  SensorBar *sensorBar;
+  SensorBar sensorBar;
   unsigned int position=50;
   unsigned int error=0;
   unsigned int errSum=0;
